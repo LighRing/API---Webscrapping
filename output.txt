@@ -13,29 +13,28 @@ Architecture du projet :
     │   └─── uat
     ├─── firestore.py
     ├─── requirements.txt
-    ├─── services
-    │   └─── epf-flower-data-science
-    │       ├─── iac
-    │       │   └─── README.md
-    │       ├─── main.py
-    │       ├─── src
-    │       │   ├─── app.py
-    │       │   ├─── config
-    │       │   │   └─── model_parameters.json
-    │       │   ├─── schemas
-    │       │   │   ├─── camelcase.py
-    │       │   │   └─── message.py
-    │       │   └─── services
-    │       │       ├─── cleaning.py
-    │       │       ├─── data.py
-    │       │       ├─── parameters.py
-    │       │       └─── utils.py
-    │       └─── tests
-    │           └─── unit
-    └─── src
-        └─── data
-            ├─── Iris.csv
-            └─── database.sqlite
+    └─── services
+        └─── epf-flower-data-science
+            ├─── iac
+            │   └─── README.md
+            ├─── main.py
+            ├─── src
+            │   ├─── app.py
+            │   ├─── config
+            │   │   └─── model_parameters.json
+            │   ├─── data
+            │   │   ├─── Iris.csv
+            │   │   └─── database.sqlite
+            │   ├─── schemas
+            │   │   ├─── camelcase.py
+            │   │   └─── message.py
+            │   └─── services
+            │       ├─── cleaning.py
+            │       ├─── data.py
+            │       ├─── parameters.py
+            │       └─── utils.py
+            └─── tests
+                └─── unit
 
 
 Contenu des fichiers :
@@ -1640,6 +1639,9 @@ fichier TP1\1 - Practical number 1_BALLINI_Thomas.ipynb:
 
 
 fichier TP2_3\.env: 
+# Utilisateur et clé API sécurisés
+KAGGLE_USERNAME=thomasballini
+KAGGLE_API_KEY=69a86b42b022c682c4b1751f4b2ba5ea
 
 
 fichier TP2_3\firestore.py: 
@@ -1959,52 +1961,10 @@ fichier TP2_3\services\epf-flower-data-science\src\config\model_parameters.json:
     }
 }
 
-fichier TP2_3\services\epf-flower-data-science\src\schemas\camelcase.py: 
-from fastapi_utils.camelcase import snake2camel
-from pydantic import BaseConfig, BaseModel
-from pydantic.generics import GenericModel
-
-
-def snake_2_camel(m: str) -> str:
-    return snake2camel(m, True)
-
-
-class CamelCase(BaseModel):
-    class Config(BaseConfig):
-        allow_population_by_field_name = True
-        alias_generator = snake_2_camel
-
-
-class GenericCamelCase(GenericModel):
-    class Config(BaseConfig):
-        allow_population_by_field_name = True
-        alias_generator = snake_2_camel
-
-
-fichier TP2_3\services\epf-flower-data-science\src\schemas\message.py: 
-from src.schemas.camelcase import CamelCase
-
-
-class MessageResponse(CamelCase):
-    message: str
-
-
-fichier TP2_3\services\epf-flower-data-science\src\services\cleaning.py: 
-
-
-fichier TP2_3\services\epf-flower-data-science\src\services\data.py: 
-
-
-fichier TP2_3\services\epf-flower-data-science\src\services\parameters.py: 
-
-
-fichier TP2_3\services\epf-flower-data-science\src\services\utils.py: 
-
-
-fichier TP2_3\src\data\database.sqlite: 
+fichier TP2_3\services\epf-flower-data-science\src\data\database.sqlite: 
 Erreur de lecture du fichier: 'utf-8' codec can't decode byte 0xe6 in position 98: invalid continuation byte
 
-fichier TP2_3\src\data\Iris.csv: 
+fichier TP2_3\services\epf-flower-data-science\src\data\Iris.csv: 
 Id,SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Species
 1,5.1,3.5,1.4,0.2,Iris-setosa
 2,4.9,3.0,1.4,0.2,Iris-setosa
@@ -2156,5 +2116,47 @@ Id,SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Species
 148,6.5,3.0,5.2,2.0,Iris-virginica
 149,6.2,3.4,5.4,2.3,Iris-virginica
 150,5.9,3.0,5.1,1.8,Iris-virginica
+
+
+fichier TP2_3\services\epf-flower-data-science\src\schemas\camelcase.py: 
+from fastapi_utils.camelcase import snake2camel
+from pydantic import BaseConfig, BaseModel
+from pydantic.generics import GenericModel
+
+
+def snake_2_camel(m: str) -> str:
+    return snake2camel(m, True)
+
+
+class CamelCase(BaseModel):
+    class Config(BaseConfig):
+        allow_population_by_field_name = True
+        alias_generator = snake_2_camel
+
+
+class GenericCamelCase(GenericModel):
+    class Config(BaseConfig):
+        allow_population_by_field_name = True
+        alias_generator = snake_2_camel
+
+
+fichier TP2_3\services\epf-flower-data-science\src\schemas\message.py: 
+from src.schemas.camelcase import CamelCase
+
+
+class MessageResponse(CamelCase):
+    message: str
+
+
+fichier TP2_3\services\epf-flower-data-science\src\services\cleaning.py: 
+
+
+fichier TP2_3\services\epf-flower-data-science\src\services\data.py: 
+
+
+fichier TP2_3\services\epf-flower-data-science\src\services\parameters.py: 
+
+
+fichier TP2_3\services\epf-flower-data-science\src\services\utils.py: 
 
 
